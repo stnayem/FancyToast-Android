@@ -69,37 +69,37 @@ public class FancyToast extends Toast {
         toast.setView(layout);
         return toast;
     }
-    public static Toast makeText(Context context,String message,int duration,int type,int ImageResource){
+    public static Toast makeText(Context context, String message, int duration, int type, boolean androidicon, int ImageResource) {
         Toast toast = new Toast(context);
-        View layout = LayoutInflater.from(context).inflate(R.layout.fancytoast_layout, null, false);
-        TextView l1 = (TextView) layout.findViewById(R.id.toast_text);
-        LinearLayout linearLayout=(LinearLayout) layout.findViewById(R.id.toast_type);
-        ImageView img=(ImageView) layout.findViewById(R.id.toast_icon);
+        toast.setDuration(duration);
+        View layout = LayoutInflater.from(context).inflate(layout.fancytoast_layout, (ViewGroup)null, false);
+        TextView l1 = (TextView)layout.findViewById(id.toast_text);
+        LinearLayout linearLayout = (LinearLayout)layout.findViewById(id.toast_type);
+        ImageView img = (ImageView)layout.findViewById(id.toast_icon);
+        ImageView img1 = (ImageView)layout.findViewById(id.imageView4);
         l1.setText(message);
-        if(type==1)
-        { linearLayout.setBackgroundResource(R.drawable.success_shape);
-          img.setImageResource(ImageResource);
+        if(androidicon) {
+            img1.setVisibility(0);
+        } else if(!androidicon) {
+            img1.setVisibility(8);
         }
-        else if (type==2)
-        { linearLayout.setBackgroundResource(R.drawable.warning_shape);
-          img.setImageResource(ImageResource);
+
+        if(type == 1) {
+            linearLayout.setBackgroundResource(drawable.success_shape);
+        } else if(type == 2) {
+            linearLayout.setBackgroundResource(drawable.warning_shape);
+        } else if(type == 3) {
+            linearLayout.setBackgroundResource(drawable.error_shape);
+        } else if(type == 4) {
+            linearLayout.setBackgroundResource(drawable.info_shape);
+        } else if(type == 5) {
+            linearLayout.setBackgroundResource(drawable.default_shape);
+        } else if(type == 6) {
+            linearLayout.setBackgroundResource(drawable.confusing_shape);
         }
-        else if (type==3)
-        { linearLayout.setBackgroundResource(R.drawable.error_shape);
-          img.setImageResource(ImageResource);
-        }
-        else if (type==4)
-        { linearLayout.setBackgroundResource(R.drawable.info_shape);
-          img.setImageResource(ImageResource);
-        }
-        else if (type==5)
-        { linearLayout.setBackgroundResource(R.drawable.default_shape);
-          img.setVisibility(View.GONE);
-        }
-        else if (type==6)
-        { linearLayout.setBackgroundResource(R.drawable.confusing_shape);
-          img.setImageResource(ImageResource);
-        }
+
+        if(type >= 1 && type <= 6) img.setImageResource(ImageResource);
+
         toast.setView(layout);
         return toast;
     }
